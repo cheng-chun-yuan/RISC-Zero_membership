@@ -39,17 +39,13 @@ use ethabi::ethereum_types::Address;
 risc0_zkvm::guest::entry!(main);
 
 pub fn main() {
-    // Read the first input using env::read
+    // STEP2 : (Guest): Read input and commit output
+    // Read the input using env::read
     let target_address: Address = env::read();
 
-    let address_in_array: [Address; 5] = [
-        Address::from_slice(&[0x00; 20]), // Fake address 1
-        Address::from_slice(&[0x01; 20]), // Fake address 2
-        Address::from_slice(&[0x02; 20]), // Fake address 3
-        Address::from_slice(&[0x03; 20]), // Fake address 4
-        Address::from_slice(&[0x04; 20]), // Fake address 5
-    ];
+    let address_in_array: [Address; 5] = env::read();
     
+    //default not member
     let mut output = false;
 
     // if target_address in address_in_array:  return true
